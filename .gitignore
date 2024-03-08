@@ -1,0 +1,25 @@
+# Compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE files
+.vscode/
+.idea/
+
+# Dependency management
+pipenv/
+Pipfile.lock
+
+# Environment variables file
+.env
+
+# Local configuration file
+config.ini
+
+# Virtual environment
+venv/
+
+library_data.json
+library.log
