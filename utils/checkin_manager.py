@@ -1,17 +1,32 @@
-from utils.user import UserManager
-from utils.book import BookManager
+"""
+Module: checkin_manage.py
+
+This module defines the CheckoutManager class, responsible for managing Check In/Out operations in the Library CLI Application.
+"""
+from utils.user_manager import UserManager
+from utils.book_manager import BookManager
 from cli import CLI
 from models.library_models import Book, User
 from logger.library_logger import LibraryLogger
 
 class CheckoutManager:
     """
-    Checkout Manager contains all the necessary utilities responsible for Check In/Out's of books.
+    CheckoutManager contains all the necessary utilities responsible for Check In/Out's of books.
     """
     def __init__(self):
+        """
+        Initialize a new CheckoutManager instance.
+        """
         self.logger = LibraryLogger()
 
     def check_out_book(self, user_id, isbn):
+        """
+        Check out a book to a user based on their user ID and the book's ISBN.
+
+        Args:
+            user_id (str): The user ID of the borrower.
+            isbn (str): The ISBN of the book to be checked out.
+        """
         user_manager = UserManager()
         book_manager = BookManager()
 
@@ -51,6 +66,13 @@ class CheckoutManager:
             CLI.display_message("User not found.")
 
     def check_in_book(self, user_id, isbn):
+        """
+        Check in a book based on the user ID and ISBN.
+
+        Args:
+            user_id (str): The user ID returning the book.
+            isbn (str): The ISBN of the book to be checked in.
+        """
         user_manager = UserManager()
         book_manager = BookManager()
 

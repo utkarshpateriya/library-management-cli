@@ -1,2 +1,2 @@
 class Config:
-    LIBRARY_DATA_FILE = "library_data.json"
+    LIBRARY_DATA_FILE = "local_storage.json"

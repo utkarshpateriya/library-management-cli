@@ -1,15 +1,31 @@
-from utils.book import BookManager
-from utils.user import UserManager
-from utils.check import CheckoutManager
+"""
+Module: library_app.py
+
+This module defines the LibraryApp class, which represents a simple library management system.
+"""
+
+from utils.book_manager import BookManager
+from utils.user_manager import UserManager
+from utils.checkin_manager import CheckoutManager
 from cli import CLI
 
 class LibraryApp:
+    """
+    The LibraryApp class represents a simple library management system.
+    It interacts with user and book management, as well as checkout functionalities through a command-line interface.
+    """
     def __init__(self):
+        """
+        Initialize a new LibraryApp instance with instances of BookManager, UserManager, and CheckoutManager.
+        """
         self.book_manager = BookManager()
         self.user_manager = UserManager()
         self.check_manager = CheckoutManager()
 
     def user_menu(self):
+        """
+        Display and handle user-related menu options.
+        """
         while True:
             CLI.display_message("\nUser Menu")
             CLI.display_message("1. Create User")
@@ -41,6 +57,9 @@ class LibraryApp:
             CLI.wait_to_continue()
 
     def book_menu(self):
+        """
+        Display and handle book-related menu options.
+        """
         while True:
             CLI.display_message("\nBook Menu")
             CLI.display_message("1. Add Book")
@@ -90,6 +109,9 @@ class LibraryApp:
             CLI.wait_to_continue()
 
     def run(self):
+        """
+        Run the main library management system loop.
+        """
         while True:
             CLI.display_message("\nLibrary Management System")
             CLI.display_message("1. User Menu")

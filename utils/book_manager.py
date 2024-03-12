@@ -1,15 +1,33 @@
+"""
+Module: book_manager.py
+
+This module defines the BookManager class, which contains methods to perform CRUD operations on books
+in the Library CLI Application.
+"""
+
 from db.storage import DataManager
 from models.library_models import Book
 from cli import CLI
 
 class BookManager(DataManager):
     """
-    Contains all the methods required to CRUD Books in Library CLI Application
+    The BookManager class contains methods required to CRUD Books in the Library CLI Application.
     """
     def __init__(self):
+        """
+        Initialize a new BookManager instance, inheriting from DataManager and specifying the data key as "books".
+        """
         super().__init__("books")
 
     def add_book(self, title, author, isbn):
+        """
+        Add a new book to the library.
+        
+        Parameters:
+        - title (str): The title of the book.
+        - author (str): The author of the book.
+        - isbn (str): The ISBN of the book.
+        """
         data = self.get_data()
         if self.isbn_is_unique(isbn):
             new_book = Book(title, author, isbn)
@@ -22,12 +40,21 @@ class BookManager(DataManager):
             CLI.display_message("Invalid isbn. Already assigned to other book")
 
     def list_books(self):
+        """
+        List all books in the library.
+        """
         data = self.get_data()
         for book_data in data:
             book = Book(**book_data)
             CLI.display_message(f"Title: {book.title}, Author: {book.author}, ISBN: {book.isbn}, Available: {book.availability}")
 
     def search_books(self, keyword):
+        """
+        Search for books in the library based on a keyword.
+        
+        Parameters:
+        - keyword (str): The keyword to search for in book titles, authors, or ISBNs.
+        """
         data = self.get_data()
         results = [Book(**book_data) for book_data in data if
                    keyword.lower() in book_data["title"].lower() or
@@ -37,6 +64,12 @@ class BookManager(DataManager):
             CLI.display_message(f"Title: {result.title}, Author: {result.author}, ISBN: {result.isbn}, Available: {result.availability}")
 
     def is_available(self, isbn):
+        """
+        Check the availability of a book in the library based on its ISBN.
+        
+        Parameters:
+        - isbn (str): The ISBN of the book.
+        """
         data = self.get_data()
         book = [Book(**book_data) for book_data in data if                   
                    isbn.lower() in book_data["isbn"].lower()]
@@ -51,7 +84,13 @@ class BookManager(DataManager):
 
     def isbn_is_unique(self, isbn):
         """
-        Checks if isbn provided is already in db or not.
+        Check if the provided ISBN is unique in the library database.
+        
+        Parameters:
+        - isbn (str): The ISBN to check for uniqueness.
+        
+        Returns:
+        - bool: True if the ISBN is unique, False otherwise.
         """
         data = self.get_data()
         book = [Book(**book_data) for book_data in data if                   

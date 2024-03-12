@@ -1,3 +1,9 @@
+"""
+Module: main.py
+
+This module serves as the main entry point for the Library CommandLineInterFace Application.
+"""
+
 import logging
 from apps.library_app import LibraryApp
 
