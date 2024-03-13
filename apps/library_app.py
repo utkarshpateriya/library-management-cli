@@ -8,6 +8,7 @@ from utils.book_manager import BookManager
 from utils.user_manager import UserManager
 from utils.checkin_manager import CheckoutManager
 from cli import CLI
+from cli_choices.library_management_choices import UserMenuOption, BookMenuOption, HomeMenuOption
 
 class LibraryApp:
     """
@@ -28,26 +29,26 @@ class LibraryApp:
         """
         while True:
             CLI.display_message("\nUser Menu")
-            CLI.display_message("1. Create User")
-            CLI.display_message("2. List Users")
-            CLI.display_message("3. Search User")
-            CLI.display_message("0. Back to Main Menu")
+            CLI.display_message(f"{UserMenuOption.CREATE_USER.value}. Create User")
+            CLI.display_message(f"{UserMenuOption.LIST_USER.value}. List Users")
+            CLI.display_message(f"{UserMenuOption.SEARCH_USER.value}. Search User")
+            CLI.display_message(f"{UserMenuOption.BACK_TO_MAIN.value}. Back to Main Menu")
 
             choice = CLI.get_user_input("Enter your choice: ")
 
-            if choice == "1":
+            if choice == UserMenuOption.CREATE_USER.value:
                 name = CLI.get_user_input("Enter the name of the user: ")
                 user_id = CLI.get_user_input("Enter the user ID: ")
                 self.user_manager.add_user(name, user_id)
 
-            elif choice == "2":
+            elif choice == UserMenuOption.LIST_USER.value:
                 self.user_manager.list_users()
 
-            elif choice == "3":
+            elif choice == UserMenuOption.SEARCH_USER.value:
                 keyword = CLI.get_user_input("Enter the keyword to search: ")
                 self.user_manager.search_user(keyword)
 
-            elif choice == "0":
+            elif choice == UserMenuOption.BACK_TO_MAIN.value:
                 CLI.display_message("Going back to the main menu!")
                 break
 
@@ -62,44 +63,44 @@ class LibraryApp:
         """
         while True:
             CLI.display_message("\nBook Menu")
-            CLI.display_message("1. Add Book")
-            CLI.display_message("2. List Books")
-            CLI.display_message("3. Search Books")
-            CLI.display_message("4. Check Out Book")
-            CLI.display_message("5. Check In Book")
-            CLI.display_message("6. Check Book Availability")
-            CLI.display_message("0. Back to Main Menu")
+            CLI.display_message(f"{BookMenuOption.ADD_BOOK.value}. Add Book")
+            CLI.display_message(f"{BookMenuOption.LIST_BOOKS.value}. List Books")
+            CLI.display_message(f"{BookMenuOption.SEARCH_BOOKS.value}. Search Books")
+            CLI.display_message(f"{BookMenuOption.CHECK_OUT_BOOK.value}. Check Out Book")
+            CLI.display_message(f"{BookMenuOption.CHECK_IN_BOOK.value}. Check In Book")
+            CLI.display_message(f"{BookMenuOption.CHECK_BOOK_AVAILABILITY.value}. Check Book Availability")
+            CLI.display_message(f"{BookMenuOption.BACK_TO_MAIN_MENU.value}. Back to Main Menu")
 
             choice = CLI.get_user_input("Enter your choice: ")
 
-            if choice == "1":
+            if choice == BookMenuOption.ADD_BOOK.value:
                 title = CLI.get_user_input("Enter the title of the book: ")
                 author = CLI.get_user_input("Enter the author of the book: ")
                 isbn = CLI.get_user_input("Enter the ISBN of the book: ")
                 self.book_manager.add_book(title, author, isbn)
 
-            elif choice == "2":
+            elif choice == BookMenuOption.LIST_BOOKS.value:
                 self.book_manager.list_books()
 
-            elif choice == "3":
+            elif choice == BookMenuOption.SEARCH_BOOKS.value:
                 keyword = CLI.get_user_input("Enter the keyword to search: ")
                 self.book_manager.search_books(keyword)
 
-            elif choice == "4":
+            elif choice == BookMenuOption.CHECK_OUT_BOOK.value:
                 user_id = CLI.get_user_input("Enter the user ID: ")
                 isbn = CLI.get_user_input("Enter the ISBN of the book to check out: ")
                 self.check_manager.check_out_book(user_id, isbn)
 
-            elif choice == "5":
+            elif choice == BookMenuOption.CHECK_IN_BOOK.value:
                 user_id = CLI.get_user_input("Enter the user ID: ")
                 isbn = CLI.get_user_input("Enter the ISBN of the book to check in: ")
                 self.check_manager.check_in_book(user_id, isbn)
 
-            elif choice == "6":
+            elif choice == BookMenuOption.CHECK_BOOK_AVAILABILITY.value:
                 isbn = CLI.get_user_input("Enter the ISBN of the book to check availability: ")
                 self.book_manager.is_available(isbn)
 
-            elif choice == "0":
+            elif choice == BookMenuOption.BACK_TO_MAIN_MENU.value:
                 CLI.display_message("Going back to the main menu!")
                 break
 
@@ -114,19 +115,19 @@ class LibraryApp:
         """
         while True:
             CLI.display_message("\nLibrary Management System")
-            CLI.display_message("1. User Menu")
-            CLI.display_message("2. Book Menu")
-            CLI.display_message("0. Exit")
+            CLI.display_message(f"{HomeMenuOption.USER_MENU.value}. User Menu")
+            CLI.display_message(f"{HomeMenuOption.BOOK_MENU.value}. Book Menu")
+            CLI.display_message(f"{HomeMenuOption.EXIT.value}. Exit")
 
             choice = CLI.get_user_input("Enter your choice: ")
 
-            if choice == "1":
+            if choice == HomeMenuOption.USER_MENU.value:
                 self.user_menu()
 
-            elif choice == "2":
+            elif choice == HomeMenuOption.BOOK_MENU.value:
                 self.book_menu()
 
-            elif choice == "0":
+            elif choice == HomeMenuOption.EXIT.value:
                 CLI.display_message("Exiting the Library Management System. Goodbye!")
                 break
 
@@ -134,3 +135,4 @@ class LibraryApp:
                 CLI.display_message("Invalid choice. Please try again.")
             
             CLI.wait_to_continue()
+            
