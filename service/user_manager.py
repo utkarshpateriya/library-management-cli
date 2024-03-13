@@ -5,8 +5,9 @@ This module defines the UserManager class, responsible for CRUD operations relat
 """
 
 from db.storage import DataManager
-from models.library_models import User
-from cli import CLI
+from models.user_model import User
+from utils.cli import CLI
+from utils.logger import LibraryLogger
 
 class UserManager(DataManager):
     """
@@ -35,7 +36,8 @@ class UserManager(DataManager):
             CLI.display_message("User created!")
 
             # Log the user addition operation
-            self.logger.log_user_added(self, name, user_id)
+            message = f"User created with name: {new_user.name}"
+            self.generate_log(message=message, action="User created")
         else:
             CLI.display_message("User with user_id already exists!!")
 
@@ -79,3 +81,15 @@ class UserManager(DataManager):
                    keyword.lower() in user_data["user_id"].lower()]
         for result in results:
             CLI.display_message(f"Name: {result.name}, User ID: {result.user_id}")
+            
+    def generate_log(self, message, action=None, level='info'):
+        """
+        Generate a log message.
+
+        Args:
+            message (str): The main content of the log message.
+            action (str, optional): The action associated with the log message. Defaults to None.
+            level (str, optional): The log level (e.g., 'info', 'warning', 'error'). Defaults to 'info'.
+        """
+        LibraryLogger.generate_log(level=level, origin="UserManager", message=message, action=action)
+        

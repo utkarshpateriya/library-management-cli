@@ -5,8 +5,8 @@ This module defines the Storage and DataManager classes, which are responsible f
 """
 
 import json
-from settings.config import Config
-from logger.library_logger import LibraryLogger
+from config import Config
+from utils.logger import LibraryLogger
 
 class Storage:
     """

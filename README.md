@@ -73,6 +73,7 @@ This organizational strategy not only enhances code readability but also positio
    ```bash
    python main.py
    ```
+There is a .env.example file that is an example of the .env file to be used. For initial run you can change the name from `.env.example` to `.env` to run.
 
 # Usage
 

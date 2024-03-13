@@ -4,11 +4,11 @@ Module: main.py
 This module serves as the main entry point for the Library CommandLineInterFace Application.
 """
 
-import logging
-from apps.library_app import LibraryApp
+from apps.library_app import UserInteractionManager
+from utils.logger import LibraryLogger
 
-logging.basicConfig(filename='library.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+LibraryLogger()
 
 if __name__ == "__main__":
-    app = LibraryApp()
+    app = UserInteractionManager()
     app.run()
