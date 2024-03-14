@@ -1,18 +1,18 @@
 """
 Module: library_app.py
 
-This module defines the UserInteractionManager class, which represents a simple library management system.
+This module defines the LibraryManagementSystem class, which represents a simple library management system.
 """
 
 from service.book_manager import BookManager
 from service.user_manager import UserManager
 from service.checkin_manager import CheckoutManager
 from utils.cli import CLI
-from cli_choices.library_management_choices import UserMenuOption, BookMenuOption, HomeMenuOption
+from utils.choices import UserMenuOption, BookMenuOption, HomeMenuOption
 
-class UserInteractionManager:
+class LibraryManagementSystem:
     """
-    The UserInteractionManager class represents a simple library management system.
+    The LibraryManagementSystem class represents a simple library management system.
     It interacts with user and book management, as well as checkout functionalities through a command-line interface.
     """
     def __init__(self):

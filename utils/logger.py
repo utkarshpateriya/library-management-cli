@@ -1,5 +1,5 @@
 """
-Module: library_logger.py
+Module: logger.py
 
 This module defines the LibraryLogger class, which is responsible for logging important events and operations within the Library CLI Application.
 """

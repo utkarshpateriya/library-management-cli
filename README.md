@@ -11,7 +11,7 @@ In response to the challenge of distinguishing between models and manager method
 - `db`
 - `logging`
 - `models`
-- `settings`
+- `service`
 - `utils`
 
 # Library Management CLI Application Folder Structure
@@ -41,9 +41,9 @@ In the `logging` folder, you'll find utilities for logging operations within the
 
 The `models` folder contains the data models representing key entities in the application, such as users and books. Each model defines the structure and behavior of its corresponding entity, facilitating a clear and organized representation of data.
 
-## `settings`
+## `service`
 
-Configuration settings for the application are stored in the `settings` folder. This includes any constants, configurations, or environment-specific variables that the application relies on.
+All the services provided by application i.e User Management, Book Management, Check in/out management have their logics in `service` folder. 
 
 ## `utils`
 
