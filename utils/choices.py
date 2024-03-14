@@ -1,5 +1,5 @@
 """
-Module: library_management_choices.py
+Module: choices.py
 
 This module defines Enums representing menu options for different parts of the library management system.
 """

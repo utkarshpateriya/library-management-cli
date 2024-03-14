@@ -1,7 +1,7 @@
 """
-Module: library_models.py
+Module: book_model.py
 
-Contains the Book and User classes representing entities used in the Library CLI Application.
+Contains the Book class representing entities used in the Library CLI Application.
 """
 
 class Book:
@@ -22,20 +22,4 @@ class Book:
         self.author = author
         self.isbn = isbn
         self.availability = availability
-
-
-class User:
-    """
-    The User class represents a user entity in the library.
-    """
-
-    def __init__(self, name, user_id):
-        """
-        Initialize a User object with name and user ID.
-
-        Args:
-            name (str): The name of the user.
-            user_id (str): The user ID of the user.
-        """
-        self.name = name
-        self.user_id = user_id
+        

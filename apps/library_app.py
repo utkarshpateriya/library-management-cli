@@ -1,29 +1,29 @@
 """
 Module: library_app.py
 
-This module defines the LibraryApp class, which represents a simple library management system.
+This module defines the LibraryManagementSystem class, which represents a simple library management system.
 """
 
-from utils.book_manager import BookManager
-from utils.user_manager import UserManager
-from utils.checkin_manager import CheckoutManager
-from cli import CLI
-from cli_choices.library_management_choices import UserMenuOption, BookMenuOption, HomeMenuOption
+from service.book_manager import BookManager
+from service.user_manager import UserManager
+from service.checkin_manager import CheckoutManager
+from utils.cli import CLI
+from utils.choices import UserMenuOption, BookMenuOption, HomeMenuOption
 
-class LibraryApp:
+class LibraryManagementSystem:
     """
-    The LibraryApp class represents a simple library management system.
+    The LibraryManagementSystem class represents a simple library management system.
     It interacts with user and book management, as well as checkout functionalities through a command-line interface.
     """
     def __init__(self):
         """
-        Initialize a new LibraryApp instance with instances of BookManager, UserManager, and CheckoutManager.
+        Initialize a new UserInteractionManager instance with instances of BookManager, UserManager, and CheckoutManager.
         """
         self.book_manager = BookManager()
         self.user_manager = UserManager()
         self.check_manager = CheckoutManager()
 
-    def user_menu(self):
+    def display_user_menu(self):
         """
         Display and handle user-related menu options.
         """
@@ -57,7 +57,7 @@ class LibraryApp:
             
             CLI.wait_to_continue()
 
-    def book_menu(self):
+    def display_book_menu(self):
         """
         Display and handle book-related menu options.
         """
@@ -122,10 +122,10 @@ class LibraryApp:
             choice = CLI.get_user_input("Enter your choice: ")
 
             if choice == HomeMenuOption.USER_MENU.value:
-                self.user_menu()
+                self.display_user_menu()
 
             elif choice == HomeMenuOption.BOOK_MENU.value:
-                self.book_menu()
+                self.display_book_menu()
 
             elif choice == HomeMenuOption.EXIT.value:
                 CLI.display_message("Exiting the Library Management System. Goodbye!")

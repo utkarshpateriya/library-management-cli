@@ -3,11 +3,12 @@ Module: checkin_manage.py
 
 This module defines the CheckoutManager class, responsible for managing Check In/Out operations in the Library CLI Application.
 """
-from utils.user_manager import UserManager
-from utils.book_manager import BookManager
-from cli import CLI
-from models.library_models import Book, User
-from logger.library_logger import LibraryLogger
+from service.user_manager import UserManager
+from service.book_manager import BookManager
+from utils.cli import CLI
+from models.book_model import Book
+from models.user_model import User
+from utils.logger import LibraryLogger
 
 class CheckoutManager:
     """
@@ -57,8 +58,9 @@ class CheckoutManager:
                 book_manager.save_data(book_data)
                 CLI.display_message(f"Book '{book.title}' checked out to {user.name}.")
 
-                # Log the check-out operation
-                self.logger.log_book_checked_out(book.title, user_id)
+                # Log the check-out operation                
+                message = f"Book '{book.title}' checked out by {user.name}."
+                self.generate_log(message=message, action="Book Check-out")
 
             else:
                 CLI.display_message("Book not available.")
@@ -102,9 +104,22 @@ class CheckoutManager:
                 CLI.display_message(f"Book '{book.title}' checked in by {user.name}.")
 
                 # Log the check-in operation
-                self.logger.log_book_checked_in(book.title, user_id)
+                message = f"Book '{book.title}' checked in by {user.name}."
+                self.generate_log(message=message, action="Book Check-in")
 
             else:
                 CLI.display_message("Book not checked out.")
         else:
             CLI.display_message("User not found.")
+            
+    def generate_log(self, message, action=None, level='info'):
+        """
+        Generate a log message.
+
+        Args:
+            message (str): The main content of the log message.
+            action (str, optional): The action associated with the log message. Defaults to None.
+            level (str, optional): The log level (e.g., 'info', 'warning', 'error'). Defaults to 'info'.
+        """
+        LibraryLogger.generate_log(level=level, origin="Checkin Manager", message=message, action=action)
+        

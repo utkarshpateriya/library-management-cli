@@ -6,8 +6,9 @@ in the Library CLI Application.
 """
 
 from db.storage import DataManager
-from models.library_models import Book
-from cli import CLI
+from models.book_model import Book
+from utils.cli import CLI
+from utils.logger import LibraryLogger
 
 class BookManager(DataManager):
     """
@@ -35,7 +36,8 @@ class BookManager(DataManager):
             self.save_data(data)
             CLI.display_message("Book entry created!")
             # Log the book addition operation
-            self.logger.log_book_added(self, title, author, new_book.isbn)
+            message = f"A book with Title: {title}, author: {author}, isbn number: {new_book.isbn} has been added"
+            self.generate_log(message, action="Book Added")
         else:
             CLI.display_message("Invalid isbn. Already assigned to other book")
 
@@ -99,3 +101,15 @@ class BookManager(DataManager):
             return False
         else:
             return True
+
+    def generate_log(self, message, action=None, level='info'):
+        """
+        Generate a log message.
+
+        Args:
+            message (str): The main content of the log message.
+            action (str, optional): The action associated with the log message. Defaults to None.
+            level (str, optional): The log level (e.g., 'info', 'warning', 'error'). Defaults to 'info'.
+        """
+        LibraryLogger.generate_log(level=level, origin="BookManager", message=message, action=action)
+        
